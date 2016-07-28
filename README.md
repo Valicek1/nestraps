@@ -6,7 +6,7 @@ Originally forked from [foglcz/nestraps](https://github.com/foglcz/nestraps)
 Installation
 ------------
 ```
-$ composer require Valicek1/nestraps
+$ composer require valicek1/nestraps
 ```
 
 How to use in nette
