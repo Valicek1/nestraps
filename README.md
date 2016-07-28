@@ -4,7 +4,7 @@ Bootstrap / Zurb Foundation forms for Nette Framework
 Installation
 ------------
 ```
-$ composer require foglcz/nestraps
+$ composer require Valicek1/nestraps
 ```
 
 How to use in nette
@@ -17,7 +17,7 @@ Update your `config.neon`:
             parameters: [type]
             class: \Nette\Application\UI\Form
             setup:
-                - setRenderer(\foglcz\Nestraps(%type%, @cacheStorage))
+                - setRenderer(\foglcz\Nestraps(%type%, @latte.templateFactory))
 ```
 
 And then in your presenter:

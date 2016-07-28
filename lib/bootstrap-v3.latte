@@ -57,23 +57,23 @@
 {* ====== Do not edit bellow this line. It contains the full markup. ====== *}
 {* Base style (the most generic one) *}
 {define #BaseStyle}
-{? $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
+{php $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
 
 {* Create row for the field if this is horizontal form *}
 <div id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
 
     {* Setup *}
-    {if !isset($control->labelPrototype->class) && $horizontalForm}{? $control->labelPrototype->class = 'control-label col-xs-12 col-sm-2'}{/if}
-    {if !isset($control->labelPrototype->class) && !$horizontalForm}{? $control->labelPrototype->class = 'control-label'}{/if}
-    {if !$control->getOption('class', false) && !isset($control->controlPrototype->class)}{? $control->controlPrototype->class = 'form-control'}{/if}
-    {if $control->getOption('placeholder', false)}{? $control->controlPrototype->placeholder = $control->getOption('placeholder')}{/if}
-    {if $control->getOption('class', false)}{? $control->controlPrototype->class = $control->getOption('class')}{/if}
+    {if !isset($control->labelPrototype->class) && $horizontalForm}{php $control->labelPrototype->class = 'control-label col-xs-12 col-sm-2'}{/if}
+    {if !isset($control->labelPrototype->class) && !$horizontalForm}{php $control->labelPrototype->class = 'control-label'}{/if}
+    {if !$control->getOption('class', false) && !isset($control->controlPrototype->class)}{php $control->controlPrototype->class = 'form-control'}{/if}
+    {if $control->getOption('placeholder', false)}{php $control->controlPrototype->placeholder = $control->getOption('placeholder')}{/if}
+    {if $control->getOption('class', false)}{php $control->controlPrototype->class = $control->getOption('class')}{/if}
     {var $prepend => ''}
     {var $append => ''}
 
     {* Prepend *}
     {if $control->getOption('prepend-html')}
-        {? $prepend = $control->getOption('prepend-html')}
+        {$prepend = $control->getOption('prepend-html')}
     {elseif $control->getOption('prepend-button')}
         {capture $prepend}
             <span class="input-group-btn">
@@ -84,7 +84,7 @@
         {capture $prepend}<span class="input-group-addon">{$control->getOption('prepend')}</span>{/capture}
     {/if}
     {if $control->getOption('append-html')}
-        {? $append = $control->getOption('append-html')}
+        {php $append = $control->getOption('append-html')}
     {elseif $control->getOption('append-button')}
         {capture $append}
             <span class="input-group-btn">
@@ -101,7 +101,7 @@
     {* Input *}
     {if $horizontalForm}<div class="col-xs-12 col-sm-6">{/if}
         {if $prepend || $append}<div class="input-group">{/if}
-            {!$prepend}{input $renderer->getControlName($control)}{!$append}
+            {$prepend|noescape}{input $renderer->getControlName($control)}{$append|noescape}
         {if $prepend || $append}</div>{/if}
         {if $control->getOption('help-style', 'inline') === 'block'}{include #helpAndError control => $control}{/if}
     {if $horizontalForm}</div>{/if}
@@ -118,12 +118,12 @@
 
 {* Radio list. Thanks to fucking bootstrap, we have to fucking copypastah codez. *}
 {define #RadioList}
-{? $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
+{php $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
     <div id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
 
         {* Setup *}
-        {if !isset($control->labelPrototype->class) && $horizontalForm}{? $control->labelPrototype->class = 'control-label col-xs-12 col-sm-2'}{/if}
-        {if !isset($control->labelPrototype->class) && !$horizontalForm}{? $control->labelPrototype->class = 'control-label'}{/if}
+        {if !isset($control->labelPrototype->class) && $horizontalForm}{php $control->labelPrototype->class = 'control-label col-xs-12 col-sm-2'}{/if}
+        {if !isset($control->labelPrototype->class) && !$horizontalForm}{php $control->labelPrototype->class = 'control-label'}{/if}
 
         {* Label *}
         {label $renderer->getControlName($control) /}
@@ -133,7 +133,7 @@
             {foreach $control->items as $key => $item}
                 {if !$control->getOption('inline', false)}<div class="radio">{/if}
                 {var one => $control->getControl($key)}
-                {!$one[1]->addClass($control->getOption('inline') ? 'radio-inline' : 'radio')->startTag()}{$one[0]}{$item}{!$one[1]->endTag()}
+                {$one[1]->addClass($control->getOption('inline') ? 'radio-inline' : 'radio')->startTag()|noescape}{$one[0]}{$item}{$one[1]->endTag()|noescape}
                 {if !$control->getOption('inline', false)}</div>{/if}
             {/foreach}
             {if $control->getOption('help-style', 'inline') === 'block'}{include #helpAndError control => $control}{/if}
@@ -145,12 +145,12 @@
 
 {* Checkbox + checkbox inline styles. Thanks to fucking bootstrap, we have to fucking copypastah codez. *}
 {define #Checkbox}
-    {? $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
+{php $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
 
     <div n:if="!$control->getOption('inline', false)" id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
         {if $horizontalForm}<div class="col-sm-offset-2 col-sm-10">{/if}
             <div class="checkbox">
-                {!$control->label->addClass('inline checkbox')->startTag()}{input $renderer->getControlName($control)}{$control->caption}{!$control->label->endTag()}
+                {$control->label->addClass('inline checkbox')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->label->endTag()|noescape}
             </div>
             {include #helpAndError control => $control}
         {if $horizontalForm}</div>{/if}
@@ -165,7 +165,7 @@
             {if !$horizontalForm}<div>{/if}
         {/if}
 
-        {!$control->label->addClass('checkbox-inline')->startTag()}{input $renderer->getControlName($control)}{$control->caption}{!$control->label->endTag()}
+        {$control->label->addClass('checkbox-inline')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->label->endTag()|noescape}
     {/if}
     {if $renderer->closeStack($iterator, $control)}
         </div>
@@ -176,29 +176,29 @@
 
 {* buttons *}
 {define #Button}
-    {? $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
-    {? $control->controlPrototype->addClass('btn')->addClass($control->getOption('class', ''))}
+	{php $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
+	{php $control->controlPrototype->addClass('btn')->addClass($control->getOption('class', ''))}
     {if $renderer->openStack()}<div class="form-group">{if $horizontalForm}<div class="col-sm-offset-2 col-sm-10">{/if}{/if}
     {input $renderer->getControlName($control)}
     {if $renderer->closeStack($iterator, $control)}{if $horizontalForm}</div>{/if}</div>{/if}
 {/define}
 
 {* Inheriting fields *}
-{define #SelectBox}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
-{define #MultiSelectBox}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
-{define #TextInput}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
-{define #TextArea}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
-{define #UploadControl}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
+{define #SelectBox}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
+{define #MultiSelectBox}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
+{define #TextInput}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
+{define #TextArea}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
+{define #UploadControl}{include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
 
-{define #ImageButton}{include #Button control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
-{define #SubmitButton}{include #Button control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}{/define}
+{define #ImageButton}{include #Button control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
+{define #SubmitButton}{include #Button control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}{/define}
 
 {* Simple fields *}
 {define #HiddenField}{input $renderer->getControlName($control)}{/define}
 
 {* ====== The main form rendering code ====== *}
 {block #form}
-{? $renderer->setFormClass($form, 'form-horizontal', array('form-inline', 'form-horizontal', 'form-search', 'form-default'))}
+	{php $renderer->setFormClass($form, 'form-horizontal', array('form-inline', 'form-horizontal', 'form-search', 'form-default'))}
 {form $form role => 'form'}
     {* errors *}
     <div class="row" n:if="!empty($errors)">
@@ -216,13 +216,13 @@
             {continueIf $control->getForm(FALSE) !== $form || $control->getOption('rendered') || !$group->getControls() || !$group->getOption('visual')}
             {var $block => $control->getOption('blockname')}
             {ifset #$block}
-                {include #$block control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}
+                {include #$block control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
             {elseif $control->getOption('latte', false)}
-                {include $control->getOption('latte') control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}
+                {include $control->getOption('latte') control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
             {else}
-                {include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}
+                {include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
             {/ifset}
-            {? $control->setOption('rendered', true)}
+	        {php $control->setOption('rendered', true)}
         {/foreach}
 
         {if $group->getOption('label', false)}</fieldset></div>{/if}
@@ -233,13 +233,13 @@
         {continueIf $control->getForm(FALSE) !== $form || $control->getOption('rendered')}
         {var $block => $control->getOption('blockname')}
         {ifset #$block}
-            {include #$block control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}
+            {include #$block control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
         {elseif $control->getOption('latte', false)}
-            {include $control->getOption('latte') control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}
+            {include $control->getOption('latte') control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
         {else}
-            {include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator, _form => $_form}
+            {include #BaseStyle control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
         {/ifset}
-        {? $control->setOption('rendered', true)}
+	    {php $control->setOption('rendered', true)}
     {/foreach}
 {/form}
 {/block}
