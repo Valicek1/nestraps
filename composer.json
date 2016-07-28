@@ -1,5 +1,5 @@
 {
-    "name": "foglcz/nestraps",
+    "name": "Valicek1/nestraps",
     "description": "Nestraps - Twitter bootstrap renderer for Nette Framework (without assets)",
     "keywords": ["nette", "forms", "bootstrap"],
     "homepage": "http://github.com/Valicek1/nestraps",
@@ -15,7 +15,8 @@
         },
 		{
 			"name": "Václav Valíček",
-			"homepage": "http://valicek.name"
+			"homepage": "http://valicek.name",
+			"email" : "vaclav@valicek.name"
 		}
     ],
     "support": {

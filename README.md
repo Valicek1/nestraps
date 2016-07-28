@@ -1,6 +1,8 @@
 Bootstrap / Zurb Foundation forms for Nette Framework
 =====================================================
 
+Originally forked from [foglcz/nestraps](https://github.com/foglcz/nestraps)
+
 Installation
 ------------
 ```

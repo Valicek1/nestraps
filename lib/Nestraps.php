@@ -1,14 +1,16 @@
 <?php
 /**
- * This file is part of foglcz/nestraps
+ * This file was part of foglcz/nestraps
  *
  * Copyright Pavel Ptacek (c) 2013
  * Copyright Filip Prochazka (c) 2012
+ * Copyright Vaclav Valicek (c) 2016
  *
  * @license LGPL
  */
 
-namespace foglcz; // to make sense out of everything ;)
+namespace Valicek1; // to make sense out of everything ;)
+
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\FileNotFoundException;
