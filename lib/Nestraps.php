@@ -9,7 +9,7 @@
  * @license LGPL
  */
 
-namespace Valicek1; // to make sense out of everything ;)
+namespace valicek1; // to make sense out of everything ;)
 
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
@@ -29,7 +29,7 @@ use Nette\Application\UI\ITemplate;
  *
  * @author Pavel Ptáček (ptacek.pavel@gmail.com)
  * @author Filip Procházka (filip@prochazka.su)
- * @see bootstrap.latte
+ * @see bootstrap-v3.latte
  * @see foundation.latte
  */
 class Nestraps implements IFormRenderer
@@ -38,23 +38,11 @@ class Nestraps implements IFormRenderer
 	/** @var string Default bootstrap (v 3.0) */
 	const BOOTSTRAP = 'bootstrap-v3.latte';
 
-	/** @var string Default foundation (v 5.0) */
-	const FOUNDATION = 'foundation-v5.latte';
-
-	/** @var string Older bootstrap (v 2.3.2) */
-	const BOOTSTRAP_2 = 'bootstrap-v2.latte';
+	///** @var string Older bootstrap (v 2.3.2) */
+	//	const BOOTSTRAP_2 = 'bootstrap-v2.latte';
 
 	/** @var string Older bootstrap (v 2.3.2) */
 	const BOOTSTRAP_3 = 'bootstrap-v3.latte';
-
-	/** @var string Even older foundation (v 3.2.5) */
-	const FOUNDATION_3 = 'foundation-v3.latte';
-
-	/** @var string Older foundation (v 4.3.2) */
-	const FOUNDATION_4 = 'foundation-v4.latte';
-
-	/** @var string Older foundation (v 4.3.2) */
-	const FOUNDATION_5 = 'foundation-v5.latte';
 
 	/**  @var Template */
 	private $template;
