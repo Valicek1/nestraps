@@ -147,25 +147,24 @@
 {define #Checkbox}
 {php $horizontalForm = (strpos($form->getElementPrototype()->attrs['class'], 'form-horizontal') !== false)}
 
-    <div n:if="!$control->getOption('inline', false)" id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
+{if !$control->getOption('inline', false)}
+    <div id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
         {if $horizontalForm}<div class="col-sm-offset-2 col-sm-10">{/if}
             <div class="checkbox">
-                {$control->getLabelProtype()->addClass('inline checkbox')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->getLabelProtype()->endTag()|noescape}
+	            {php $control->getLabelPrototype()->addClass('checkbox inline')}{input $renderer->getControlName($control)}
             </div>
             {include #helpAndError control => $control}
         {if $horizontalForm}</div>{/if}
     </div>
-
-    {if $control->getOption('inline', false)}
-        {if $renderer->openStack()}
+{else}
+    {if $renderer->openStack()}
             <div id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
             <label n:if="$horizontalForm" class="control-label col-xs-12 col-sm-2">{$control->getOption('label')}</label>
             <label n:if="!$horizontalForm" class="control-label">{$control->getOption('label')}</label>
             {if $horizontalForm}<div class="col-xs-12 col-sm-6">{/if}
             {if !$horizontalForm}<div>{/if}
         {/if}
-
-        {$control->getLabelProtype()->addClass('checkbox-inline')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->getLabelProtype()->endTag()|noescape}
+        {php $control->getLabelPrototype()->addClass('checkbox-inline')}{input $renderer->getControlName($control)}
     {/if}
     {if $renderer->closeStack($iterator, $control)}
         </div>
