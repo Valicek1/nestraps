@@ -150,7 +150,7 @@
     <div n:if="!$control->getOption('inline', false)" id="{$control->htmlId}-pair" n:class="form-group, $control->getOption('status')?  'has-' . $control->getOption('status'), $control->getOption('required')? required, $control->errors ? has-error">
         {if $horizontalForm}<div class="col-sm-offset-2 col-sm-10">{/if}
             <div class="checkbox">
-                {$control->label->addClass('inline checkbox')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->label->endTag()|noescape}
+                {$control->getLabelProtype()->addClass('inline checkbox')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->getLabelProtype()->endTag()|noescape}
             </div>
             {include #helpAndError control => $control}
         {if $horizontalForm}</div>{/if}
@@ -165,7 +165,7 @@
             {if !$horizontalForm}<div>{/if}
         {/if}
 
-        {$control->label->addClass('checkbox-inline')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->label->endTag()|noescape}
+        {$control->getLabelProtype()->addClass('checkbox-inline')->startTag()|noescape}{input $renderer->getControlName($control)}{$control->caption}{$control->getLabelProtype()->endTag()|noescape}
     {/if}
     {if $renderer->closeStack($iterator, $control)}
         </div>
