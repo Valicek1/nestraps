@@ -211,7 +211,7 @@
 			{if $group->getOption('description', false)}<p>{$group->getOption('description')}</p>{/if}
 		{/if}
 
-		{foreach $group->controls as $control}
+		{foreach $group->getControls() as $control}
 			{continueIf $control->getForm(FALSE) !== $form || $control->getOption('rendered') || !$group->getControls() || !$group->getOption('visual')}
 			{var $block => $control->getOption('blockname')}
 			{ifset #$block}
