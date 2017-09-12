@@ -13,11 +13,11 @@
             "name": "Pavel Ptáček",
             "homepage": "http://animalgroup.cz"
         },
-		{
-			"name": "Václav Valíček",
-			"homepage": "http://valicek.name",
-			"email" : "vaclav@valicek.name"
-		}
+        {
+            "name": "Václav Valíček",
+            "homepage": "http://valicek.name",
+            "email" : "vaclav@valicek.name"
+        }
     ],
     "support": {
         "issues": "https://github.com/Valicek1/nestraps/issues"
