@@ -3,11 +3,11 @@
     "description": "Nestraps - Twitter bootstrap renderer for Nette Framework (without assets)",
     "keywords": ["nette", "forms", "bootstrap"],
     "homepage": "http://github.com/Valicek1/nestraps",
-    "license": ["LGPL"],
+    "license": ["LGPL-2.0-or-later"],
     "authors":[
         {
             "name":"Filip Procházka",
-            "homepage":"http://hosiplan.com"
+            "homepage":"https://filip-prochazka.com/"
         },
         {
             "name": "Pavel Ptáček",
