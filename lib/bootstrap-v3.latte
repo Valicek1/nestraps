@@ -68,8 +68,8 @@
 	{if !$control->getOption('class', false) && !isset($control->controlPrototype->class)}{php $control->controlPrototype->class = 'form-control'}{/if}
 	{if $control->getOption('placeholder', false)}{php $control->controlPrototype->placeholder = $control->getOption('placeholder')}{/if}
 	{if $control->getOption('class', false)}{php $control->controlPrototype->class = $control->getOption('class')}{/if}
-	{var $prepend => ''}
-	{var $append => ''}
+	{var $prepend = ''}
+	{var $append = ''}
 
 	{* Prepend *}
 	{if $control->getOption('prepend-html')}
@@ -132,7 +132,7 @@
 		{if $horizontalForm}<div class="col-xs-12 col-sm-6">{/if}
 			{foreach $control->items as $key => $item}
 				{if !$control->getOption('inline', false)}<div class="radio">{/if}
-				{var one => $control->getControl($key)}
+				{var $one = $control->getControl($key)}
 				{$one[1]->addClass($control->getOption('inline') ? 'radio-inline' : 'radio')->startTag()|noescape}{$one[0]}{$item}{$one[1]->endTag()|noescape}
 				{if !$control->getOption('inline', false)}</div>{/if}
 			{/foreach}
@@ -213,7 +213,7 @@
 
 		{foreach $group->getControls() as $control}
 			{continueIf $control->getForm(FALSE) !== $form || $control->getOption('rendered') || !$group->getControls() || !$group->getOption('visual')}
-			{var $block => $control->getOption('blockname')}
+			{var $block = $control->getOption('blockname')}
 			{ifset #$block}
 				{include #$block control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
 			{elseif $control->getOption('latte', false)}
@@ -230,7 +230,7 @@
 	{* rest of the controls *}
 	{foreach $form->getControls() as $control}
 		{continueIf $control->getForm(FALSE) !== $form || $control->getOption('rendered')}
-		{var $block => $control->getOption('blockname')}
+		{var $block = $control->getOption('blockname')}
 		{ifset #$block}
 			{include #$block control => $control, form => $form, errors => $errors, renderer => $renderer, iterator => $iterator}
 		{elseif $control->getOption('latte', false)}
